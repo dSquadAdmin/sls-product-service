@@ -1,14 +1,12 @@
 import React, {useState } from "react";
 import InputField from "../UiComponents/Input/input";
-import "./index.css";
 import { useDispatch, useSelector } from "react-redux";
 import { saveUserAuth } from "../../reducers/auth";
-// import { getProducts } from "../../api";
-// import { loadedProducts, loadingProducts, saveProducts } from "../../reducers/product";
 import logo from "../../logo.png";
 import { AppState } from "../../store";
 import { getProducts } from "../../api";
 import { loadedProducts, loadingProducts, saveProducts } from "../../reducers/product";
+import "./index.css";
 
 const Login = () => {
   const [token, setToken] = useState("");

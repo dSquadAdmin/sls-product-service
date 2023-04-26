@@ -3,10 +3,9 @@ import Modal from "../UiComponents/Modal";
 import { Alert } from "../UiComponents/Alert";
 import { useDispatch } from "react-redux";
 import { IProduct } from "../../types";
-import { loadingProducts, saveProduct as actionSaveProduct } from "../../reducers/product";
+import { saveProduct as actionSaveProduct } from "../../reducers/product";
 import { saveProduct } from '../../api';
 import InputField from "../UiComponents/Input/input";
-import { error } from "console";
 import { TextArea } from "../UiComponents/Input/textarea";
 
 interface IProps {
@@ -87,7 +86,7 @@ export const ProductForm = (props: IProps) => {
     if (validate()){
       saveProduct(product, token).then((result: any)=>{
         dispatch(actionSaveProduct(result.data.data.data as IProduct));
-        closeForm();
+        handleClose();
       }).catch(()=>(setErrors({...errors, err: "Unable to create product."})));
     }
   };
@@ -99,8 +98,7 @@ export const ProductForm = (props: IProps) => {
         submit();
       }}
       onClickCancel={() => {
-        
-        closeForm();
+        handleClose();
       }}
       title={""}
     >
