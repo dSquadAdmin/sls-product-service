@@ -1,0 +1,3 @@
+
+export {authorizerHandler} from './auth'
+
