@@ -16,6 +16,7 @@ export const listProducts: APIGatewayProxyHandler = async (
   let response: ResponseModel;
   let fromIndex = new Date().getTime();
   let limit = 25;
+  let forward = ""
   const { queryStringParameters: queryParams } = event;
   if (queryParams) {
     fromIndex =
@@ -26,6 +27,7 @@ export const listProducts: APIGatewayProxyHandler = async (
       queryParams.limit && !isNaN(parseInt(queryParams.limit))
         ? parseInt(queryParams.limit)
         : limit;
+    forward = queryParams.forward;
   }
 
   const databaseService = new DatabaseService();
@@ -33,11 +35,13 @@ export const listProducts: APIGatewayProxyHandler = async (
     ":partKey": "item-key",
     ":startIndex": fromIndex,
   });
+  const scanForward = (forward && forward === "1")
+  const query = (scanForward) ? "#pk = :partKey AND #id > :startIndex" : "#pk = :partKey AND #id < :startIndex"
   const params: QueryInput = {
     TableName: process.env.TABLE_NAME,
-    KeyConditionExpression: "#pk = :partKey AND #id < :startIndex",
+    KeyConditionExpression: query,
     ExpressionAttributeValues: attributeValues,
-    ScanIndexForward: false,
+    ScanIndexForward: scanForward,
     ExpressionAttributeNames: {
       "#pk": "pk",
       "#id": "id",
