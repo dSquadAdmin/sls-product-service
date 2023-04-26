@@ -2,8 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { IAuthState } from "../types";
 
+// persist token in the session storage
+// so that ui state remains on refresh
 const token = sessionStorage.getItem("token") as string;
-
 const initialState: IAuthState = {
   authToken: (token === null || token === undefined)? "" : token
 };
