@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Login from './components/Login';
 import './App.css';
-import ProductTable from './components/ProductList';
-import NavBar from './components/NavBar';
+import { useSelector } from 'react-redux';
+import { AppState } from './store';
+import DashBoard from './components/DashBoard';
 
 function App() {
-  
+  const {authToken} = useSelector((state:AppState)=>state.auth);
+  const [authoRized, setAuthorized] = useState(authToken !== "");
+
+  useEffect(() => {
+    setAuthorized(authToken !== "");
+  }, [authToken]);
   return (
     <div>
-      <NavBar/>
-      {process.env.API_URL}
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <ProductTable />
-      </div>
+      {!authoRized ? (
+      <Login/>
+      ) : (
+        <div>
+          <DashBoard />
+        </div>
+      )}
     </div>
   );
 }
