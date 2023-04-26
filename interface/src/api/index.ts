@@ -11,10 +11,6 @@ const PROD_DATA: IProductResponse = {
                 ipsum dollor lorem ipsum dollar lorem ipsum dollar
                 ipsum dollor lorem ipsum dollar lorem ipsum dollar
                 ipsum dollor lorem ipsum dollar lorem ipsum dollar
-                ipsum dollor lorem ipsum dollar lorem ipsum dollar
-                ipsum dollor lorem ipsum dollar lorem ipsum dollar
-                ipsum dollor lorem ipsum dollar lorem ipsum dollar
-                ipsum dollor lorem ipsum dollar lorem ipsum dollar
                 `,
                imageUrl: `https://example.com/img/${i}`, 
                price: 2.5*i
@@ -29,12 +25,6 @@ export const getProducts = (payload: {page: number, perPage: number}) => {
 };
 
 export const saveProduct = (payload: IProduct) => {
-    return new Promise((resolve, reject) => {
-        resolve(payload);
-    });
-};
-
-export const updateProduct = (payload: IProduct) => {
     return new Promise((resolve, reject) => {
         resolve(payload);
     });

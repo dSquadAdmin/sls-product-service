@@ -2,7 +2,7 @@ import type { AWS } from '@serverless/typescript';
 import { handler }from '@functions/index';
 
 const serverlessConfiguration: AWS = {
-  service: 'product-service-v3',
+  service: '${file(../config.json):service}',
   frameworkVersion: '3',
   plugins: ['serverless-esbuild'],
   provider: {
