@@ -26,6 +26,9 @@ export const handler = {
         httpApi: {
           method: "get",
           path: "/products",
+          authorizer: {
+            name: "apiAuthorizer",
+          },
         },
       },
     ],

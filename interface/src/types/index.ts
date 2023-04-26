@@ -34,8 +34,8 @@ export interface IProduct {
 
 export interface IProductsState {
     data: Array<IProduct>;
-    page: number;
-    perPage: number;
+    fromIndex: number;
+    limit: number;
     total: number;
     loading: boolean;
 }
