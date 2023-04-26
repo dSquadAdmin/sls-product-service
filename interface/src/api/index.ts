@@ -12,6 +12,6 @@ export const saveProduct = async (payload: IProduct, apiKey: string) => {
     return await axios.post(`${baseUrl}/products`, payload, {headers: {"Authorization": apiKey}});
 };
 
-export const deleteProduct = async (payload: {id: string}, apiKey: string) => {
+export const deleteProduct = async (payload: {id: number}, apiKey: string) => {
     return await axios.delete(`${baseUrl}/products/${payload.id}`, {headers: {"Authorization": apiKey}});
 };

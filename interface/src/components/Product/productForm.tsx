@@ -131,7 +131,7 @@ export const ProductForm = (props: IProps) => {
           name={"description"}
           value={product.description}
           label={"Description"} 
-          isError={errors["description"]} 
+          isError={errors["description"]}
           placeholder={"Description"} 
           message={"Description is required field."} 
           onChange={(ev)=>handelValueChange("description", ev)}         

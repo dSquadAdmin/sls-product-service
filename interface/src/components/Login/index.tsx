@@ -7,6 +7,8 @@ import { saveUserAuth } from "../../reducers/auth";
 // import { loadedProducts, loadingProducts, saveProducts } from "../../reducers/product";
 import logo from "../../logo.png";
 import { AppState } from "../../store";
+import { getProducts } from "../../api";
+import { loadedProducts, loadingProducts, saveProducts } from "../../reducers/product";
 
 const Login = () => {
   const [token, setToken] = useState("");
@@ -20,15 +22,15 @@ const Login = () => {
 
   const saveToken = async () => {
     try {
-      // dispatch(loadingProducts());
-      // const data = await getProducts({ fromIndex: 0, limit: 25 }, token);
+      dispatch(loadingProducts());
+      const data = await getProducts({ fromIndex: 0, limit: 25, forward: false }, token);
       dispatch(saveUserAuth(token));
       setToken(token);
-      // saveProducts({ ...data.data, fromIndex: 0, limit: 25 });
+      saveProducts({ ...data.data, fromIndex: new Date().getTime(), limit: 25 });
     } catch (err) {
-      // setMessage("Invalid API key.");
+      setMessage("Invalid API key.");
     }
-    // dispatch(loadedProducts());
+    dispatch(loadedProducts());
   };
   
   return (

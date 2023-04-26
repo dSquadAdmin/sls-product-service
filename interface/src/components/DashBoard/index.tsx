@@ -4,11 +4,10 @@ import ContentArea from "./contentArea";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../reducers/auth";
 import { AppState } from "../../store";
-import { loadedProducts, loadingProducts, saveProducts } from "../../reducers/product";
+import { deleteProduct, loadedProducts, loadingProducts, saveProducts } from "../../reducers/product";
 import * as API from "../../api";
 import { Alert } from "../UiComponents/Alert";
 import { ProductTable } from "../Product";
-import { ProductDetail } from "../Product/productCard";
 
 interface IProps {
   token: string;
@@ -107,6 +106,16 @@ const DashBoard = (props: IProps) => {
             }} 
           />
         )}
+        {errors["success"] && (
+          <Alert 
+            title="Success" 
+            message={errors["success"]}
+            type="info"
+            onClose={()=>{
+              setErrors({});
+            }} 
+          />
+        )}
         <ProductTable 
           token={props.token}
           loading={loading} 
@@ -130,8 +139,14 @@ const DashBoard = (props: IProps) => {
             fetchData(index, numPerPage, true);
           }}
           onChangeLimit={(value)=>fetchData(new Date().getTime(), value, false)}
+          onDeleteProduct={(id: number)=>{
+            API.deleteProduct({id}, props.token)
+              .then(()=>{
+                setErrors({"success": "Successfully deleted product"});
+                dispatch(deleteProduct(id));
+              }).catch(()=>setErrors({"err": "Failed to deleted product"}));
+          }}
         />
-        {data&& data.length>0 && <ProductDetail {...data[0]} />}
       </ContentArea>
     </div>
   );

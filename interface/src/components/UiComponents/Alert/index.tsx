@@ -4,7 +4,7 @@ export const Alert = (props: { title: string; message: string; type: "danger"|"i
   const { title, message, type, onClose } = props;
   return (
     <div
-      className={`bg-red-100 border ${type === "danger" ? "border-red-400 text-red-700" : "border-green-400 text-green-700"}  px-4 py-3 rounded relative`}
+      className={`${type === "danger" ? "bg-red-100" : "bg-green-100"} border ${type === "danger" ? "border-red-400 text-red-700" : "border-green-400 text-green-700"}  px-4 py-3 rounded relative`}
       role="alert"
     >
       <strong className="font-bold">{title}!</strong>
