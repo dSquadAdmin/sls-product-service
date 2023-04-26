@@ -3,14 +3,10 @@ export interface IAuthRequest {
     password: string;
 }
 
-export interface IAuth {
+export interface IAuthState {
     authToken: string;
 }
 
-export interface IAuthState  {
-    auth: IAuth;
-    loading: boolean;
-}
 
 export interface IProductRequest {
     page: number;
@@ -18,9 +14,11 @@ export interface IProductRequest {
 }
 
 export interface IProductResponse {
-    products: Array<IProduct>;
-    page: number;
-    perPage: number;
+    data: {
+        products: Array<IProduct>;
+    },
+    fromIndex: number;
+    limit: number;
     total: number;
 }
 

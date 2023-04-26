@@ -1,33 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
-import { IAuth, IAuthState } from "../types";
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
+import { IAuthState } from "../types";
 
 const initialState: IAuthState = {
-    auth : {
-        authToken: "",
-    },
-    loading: false,
+  authToken: "",
 };
 
 export const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
-    saveUserAuth: (state, action: PayloadAction<IAuth>) => {   
-        state.loading = true
-        state.auth = action.payload
+    saveUserAuth: (state, action: PayloadAction<string>) => {
+      state.authToken = action.payload;
     },
-
-    logIn: (state) => {
-      state.loading = true;
-    },
-
     logOut: (state) => {
-      state = initialState;
+      state.authToken = "";
     },
-
   },
-})
+});
 
-export const { saveUserAuth, logIn, logOut } = authSlice.actions;
-export default authSlice
+export const { saveUserAuth, logOut } = authSlice.actions;
+export default authSlice;

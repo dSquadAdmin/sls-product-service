@@ -4,8 +4,8 @@ import { IProduct, IProductResponse, IProductsState } from "../types";
 
 const initialState: IProductsState = {
     data: [],
-    perPage: 10,
-    page: 1,
+    limit: 10,
+    fromIndex: 1,
     loading: false,
     total: 0
 };
@@ -21,10 +21,10 @@ export const productSlice = createSlice({
             state.loading = false;
         },
         saveProducts: (state, action: PayloadAction<IProductResponse>) => {
-            const {products: data, page, perPage, total } = action.payload
-            state.data = data
-            state.page = page
-            state.perPage = perPage
+            const {data: { products }, fromIndex, limit, total } = action.payload
+            state.data = products
+            state.fromIndex = fromIndex
+            state.limit = limit
             state.total = total
             state.loading = false
         },
