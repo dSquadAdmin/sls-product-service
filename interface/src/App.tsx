@@ -13,7 +13,7 @@ function App() {
     setAuthorized(authToken !== "");
   }, [authToken]);
   return (
-    <div>
+    <React.StrictMode>
       {!authoRized ? (
       <Login/>
       ) : (
@@ -21,7 +21,7 @@ function App() {
           <DashBoard />
         </div>
       )}
-    </div>
+    </React.StrictMode>
   );
 }
 
