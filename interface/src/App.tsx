@@ -18,7 +18,7 @@ function App() {
       <Login/>
       ) : (
         <div>
-          <DashBoard />
+          <DashBoard token={authToken} />
         </div>
       )}
     </React.StrictMode>

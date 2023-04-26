@@ -6,7 +6,7 @@ interface IProps {
   isError: boolean;
   placeholder: string;
   message: string;
-  value: string|number|undefined;
+  value?: string|number;
   type: "text"|"number"|"url"|"password";
   onChange: (value: any) => void;
 }
@@ -16,7 +16,7 @@ const InputField = (props: IProps) => {
   const errClass = isError ? "border-red-500" : "";
 
   return (
-    <div className="mb-6">
+    <div>
       <label
         className="block text-gray-700 text-sm font-bold mb-2"
         htmlFor={name}

@@ -2,9 +2,10 @@ import axios from 'axios';
 import { IProduct, IProductResponse } from "../types";
 import { baseUrl } from './url';
 
-export const getProducts = async (payload: {fromIndex: number, limit: number}, apiKey: string) => {
-    const {fromIndex, limit} = payload;
-    return await axios.get<IProductResponse>(`${baseUrl}/products?fromIndex=${fromIndex}&limit=${limit}`, {headers: {"Authorization": apiKey}});
+export const getProducts = async (payload: {fromIndex: number, limit: number, forward: boolean}, apiKey: string) => {
+    const {fromIndex, limit, forward} = payload;
+    const url = `${baseUrl}/products?fromIndex=${fromIndex}&limit=${limit}&forward=${forward?"1":"0"}`
+    return await axios.get<IProductResponse>(url, {headers: {"Authorization": apiKey}});
 };
 
 export const saveProduct = async (payload: IProduct, apiKey: string) => {

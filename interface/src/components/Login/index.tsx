@@ -23,6 +23,7 @@ const Login = () => {
       // dispatch(loadingProducts());
       // const data = await getProducts({ fromIndex: 0, limit: 25 }, token);
       dispatch(saveUserAuth(token));
+      setToken(token);
       // saveProducts({ ...data.data, fromIndex: 0, limit: 25 });
     } catch (err) {
       // setMessage("Invalid API key.");
@@ -44,10 +45,11 @@ const Login = () => {
           <InputField
             key={message}
             name={"API Key"}
-            redacted={true}
             label={"Api Key"}
+            type="password"
             isError={message !== ""}
             placeholder={"api key"}
+            value={token}
             message={message}
             onChange={onChange}
           />

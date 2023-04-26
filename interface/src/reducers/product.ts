@@ -5,7 +5,7 @@ import { IProduct, IProductResponse, IProductsState } from "../types";
 const initialState: IProductsState = {
     data: [],
     limit: 10,
-    fromIndex: 1,
+    fromIndex: new Date().getTime(),
     loading: false,
     total: 0
 };
@@ -21,18 +21,16 @@ export const productSlice = createSlice({
             state.loading = false;
         },
         saveProducts: (state, action: PayloadAction<IProductResponse>) => {
-            const {data: { products }, fromIndex, limit, total } = action.payload
+            const {data: { products }, fromIndex, limit } = action.payload
             state.data = products
             state.fromIndex = fromIndex
             state.limit = limit
-            state.total = total
             state.loading = false
         },
-        deleteProduct: (state, action: PayloadAction<string>) => {
+        deleteProduct: (state, action: PayloadAction<number>) => {
             const products = state.data.filter(p=>p.id !== action.payload);
             state.data = products;
             state.loading = false;
-            state.total -= 1;
         },
         saveProduct: (state, action: PayloadAction<IProduct>) => {
             const products = state.data.filter(p=>p.id !== action.payload.id);
