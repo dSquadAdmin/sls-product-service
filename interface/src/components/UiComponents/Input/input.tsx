@@ -7,11 +7,12 @@ interface IProps {
   placeholder: string;
   message: string;
   value?: string|number;
+  required?: boolean;
   type: "text"|"number"|"url"|"password";
   onChange: (value: any) => void;
 }
 const InputField = (props: IProps) => {
-  const { name, label, isError, placeholder, message, type, value, onChange } =
+  const { name, label, isError, placeholder, message, type, value, onChange, required } =
     props;
   const errClass = isError ? "border-red-500" : "";
 
@@ -21,7 +22,7 @@ const InputField = (props: IProps) => {
         className="block text-gray-700 text-sm font-bold mb-2"
         htmlFor={name}
       >
-        {label}
+        {label} {required && "*"}
       </label>
       <input
         className={`shadow appearance-none border ${errClass} rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline`}

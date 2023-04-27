@@ -119,6 +119,7 @@ export const ProductForm = (props: IProps) => {
           name={"name"} 
           type="text"
           label={"Name"} 
+          required={true}
           isError={errors["name"]} 
           placeholder={"name"} 
           value={product.name}
@@ -128,6 +129,7 @@ export const ProductForm = (props: IProps) => {
         <TextArea   
           name={"description"}
           value={product.description}
+          required={true}
           label={"Description"} 
           isError={errors["description"]}
           placeholder={"Description"} 
@@ -136,6 +138,7 @@ export const ProductForm = (props: IProps) => {
         />
         <InputField   
           name={"price"} 
+          required={true}
           type="number"
           label={"Price"}
           isError={errors["price"]} 
@@ -145,10 +148,11 @@ export const ProductForm = (props: IProps) => {
         />
         <InputField   
           name={"imageUrl"} 
+          required={true}
           type="url"
           label={"Image URL"}
           isError={errors["imageUrl"]} 
-          placeholder={"http://www.example.com"} 
+          placeholder={"https://www.example.com/1.jpg"} 
           message={"Image URL is invalid."} 
           onChange={(ev)=>handelValueChange("imageUrl", ev)}         
         />

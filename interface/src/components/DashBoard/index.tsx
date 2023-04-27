@@ -34,6 +34,7 @@ const DashBoard = (props: IProps) => {
             limit: limit,
           }))
         }
+        dispatch(loadedProducts());
       }).catch(error=>{
         let message = "Unable to fetch products!";
         if (error.response && error.response.status ===403 ) {
@@ -47,7 +48,7 @@ const DashBoard = (props: IProps) => {
     if (!loading && data.length < 1){
       fetchData(new Date().getTime(), numPerPage, false);
     }
-  }, [data.length, fetchData, loading, numPerPage]);
+  }, []);
   
 
   return (
