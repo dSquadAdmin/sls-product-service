@@ -42,4 +42,3 @@ export const createProduct: APIGatewayProxyHandler = async (
   return response.generate();
 };
 
-export const main = createProduct;

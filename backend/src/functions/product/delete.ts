@@ -31,4 +31,3 @@ export const deleteProduct: APIGatewayProxyHandler = async (
   return response.generate();
 };
 
-export const main = deleteProduct;
