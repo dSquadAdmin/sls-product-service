@@ -1,21 +1,19 @@
-service: '${file(../config.json):service}-interface'
-frameworkVersion: '3'
+service: "${file(../config.json):service}-interface"
 
 provider:
     name: aws
-    runtime: nodejs18.x
-    environment:
-        API_URL: "${self:custom.apiUrl}"
+    runtime: nodejs14.x
 
 plugins:
     - serverless-s3-sync
 
 custom:
-    bucketName: '${sls:stage}-${file(../config.json):service}-interface-bucket'
+    bucketName: "${file(../config.json):service}-deployment-bucket"
     s3Sync:
+        noSync: true
+        buckets:
         - bucketName: ${self:custom.bucketName}
-          localDir: ./build/
-    apiUrl: { "Fn::ImportValue": "${self:custom.apiUrl}" }
+          localDir: build/
 
 resources:
     Resources:
@@ -23,7 +21,6 @@ resources:
             Type: AWS::S3::Bucket
             Properties:
                 BucketName: ${self:custom.bucketName}
-                AccessControl: PublicRead
                 WebsiteConfiguration:
                     IndexDocument: index.html
                     ErrorDocument: index.html
@@ -37,8 +34,6 @@ resources:
                         - Sid: PublicReadGetObject
                           Effect: Allow
                           Principal: '*'
-                          Action:
-                              - s3:GetObject
                           Resource: arn:aws:s3:::${self:custom.bucketName}/*
         CloudFrontDistribution:
             Type: AWS::CloudFront::Distribution
@@ -59,13 +54,8 @@ resources:
                           ResponsePagePath: /index.html
                     DefaultCacheBehavior:
                         AllowedMethods:
-                            - DELETE
-                            - GET
                             - HEAD
-                            - OPTIONS
-                            - PATCH
-                            - POST
-                            - PUT
+                            - GET
                         TargetOriginId: ReactApp
                         ForwardedValues:
                             QueryString: false
